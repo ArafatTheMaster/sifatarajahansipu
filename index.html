@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Form - Sifat Ara Jahan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .per-container {
+      max-width: 838px;
+      margin: auto;
+      border: 2px solid #333;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 40px;
+    }
+
+    .edu-container {
+      border: 2px solid #333;
+      width: fit-content;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 40px auto;
+    }
+
+    .edu-header {
+      background-color: #7fc4a0;
+      color: white;
+      font-weight: bold;
+      padding: 8px 15px;
+      font-size: 20px;
+      border-top-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      display: block;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    label, input, textarea {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    label {
+      width: 35%;
+    }
+
+    input, textarea {
+      width: 40%;
+      box-sizing: border-box;
+    }
+
+    .copy-button {
+      width: 10%;
+      margin-left: 5px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px 15px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+      
+ /* Button container */
+  .download-area {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 18px 0;
+  }
+
+  /* Styled download buttons */
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #2f855a;
+    background: linear-gradient(180deg,#9ee3b9,#7fc4a0);
+    color: #042b18;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    transition: transform .08s ease, box-shadow .08s ease;
+  }
+
+  .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+  }
+
+  .download-icon {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+      
+  </style>
+  <script>
+    function copyText(inputId) {
+      var inputField = document.getElementById(inputId);
+      inputField.select();
+      navigator.clipboard.writeText(inputField.value)
+        .then(() => {
+          console.log('Text copied to clipboard');
+        })
+        .catch(err => {
+          console.error('Unable to copy text', err);
+        });
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Personal Info -->
+  <div class="per-container">
+    <form action="#" method="post">
+      <div class="edu-header">Applicant's Information</div> <br>
+
+      <label for="NameEng">Applicant's Name:</label>
+      <input type="text" id="NameEng" name="NameEng" required value="SIFAT ARA JAHAN">
+      <button type="button" class="copy-button" onclick="copyText('NameEng')">Copy</button>
+
+      <label for="NameBngla">আবেদনকারীর নাম (বাংলায়):</label>
+      <input type="text" id="NameBngla" name="NameBngla" required value="সিফাত আরা জাহান">
+      <button type="button" class="copy-button" onclick="copyText('NameBngla')">Copy</button>
+
+      <label for="fatherName">Father's Name</label>
+      <input type="text" id="fatherName" name="fatherName" required value="MD. SELIM UDDIN">
+      <button type="button" class="copy-button" onclick="copyText('fatherName')">Copy</button>
+
+      <label for="fatherNameB">পিতার নাম (বাংলায়):</label>
+      <input type="text" id="fatherNameB" name="fatherNameB" required value="মোঃ সেলিম উদ্দিন">
+      <button type="button" class="copy-button" onclick="copyText('fatherNameB')">Copy</button>
+
+      <label for="motherName">Mother's Name</label>
+      <input type="text" id="motherName" name="motherName" required value="MOST. AMINA BEGUM">
+      <button type="button" class="copy-button" onclick="copyText('motherName')">Copy</button>
+
+      <label for="motherNameB">মাতার নাম (বাংলায়):</label>
+      <input type="text" id="motherNameB" name="motherNameB" required value="মোছাঃ আমিনা বেগম">
+      <button type="button" class="copy-button" onclick="copyText('motherNameB')">Copy</button>
+
+      <label for="BirthDay">Date of Birth</label>
+      <input type="text" id="BirthDay" name="BirthDay" required value="20-Sep-2000">
+      <button type="button" class="copy-button" onclick="copyText('BirthDay')">Copy</button>
+
+      <label for="Nationality">Nationality</label>
+      <input type="text" id="Nationality" name="Nationality" required value="Bangladeshi">
+      <button type="button" class="copy-button" onclick="copyText('Nationality')">Copy</button>
+
+      <label for="Religion">Religion</label>
+      <input type="text" id="Religion" name="Religion" required value="Islam">
+      <button type="button" class="copy-button" onclick="copyText('Religion')">Copy</button>
+
+      <label for="Gender">Gender</label>
+      <input type="text" id="Gender" name="Gender" required value="Female">
+      <button type="button" class="copy-button" onclick="copyText('Gender')">Copy</button>
+
+      <label for="NationalID">National ID</label>
+      <input type="text" id="NationalID" name="NationalID" required value="7810738885">
+      <button type="button" class="copy-button" onclick="copyText('NationalID')">Copy</button>
+
+      <label for="birthReg">Birth Registration</label>
+      <input type="text" id="birthReg" name="birthReg" required value="20007727302002479">
+      <button type="button" class="copy-button" onclick="copyText('birthReg')">Copy</button>
+
+      <label for="PassportID">Passport ID</label>
+      <input type="text" id="PassportID" name="PassportID" required value="N/A">
+      <button type="button" class="copy-button" onclick="copyText('PassportID')">Copy</button>
+
+      <label for="maritalStatus">Marital Status</label>
+      <input type="text" id="maritalStatus" name="maritalStatus" required value="Single">
+      <button type="button" class="copy-button" onclick="copyText('maritalStatus')">Copy</button>
+
+      <label for="PHNOE">Mobile Number</label>
+      <input type="text" id="PHNOE" name="PHNOE" required value="01701650165">
+      <button type="button" class="copy-button" onclick="copyText('PHNOE')">Copy</button>
+
+      <label for="EmailName">Email</label>
+      <input type="text" id="EmailName" name="EmailName" required value="sifatarajahansipu@gmail.com">
+      <button type="button" class="copy-button" onclick="copyText('EmailName')">Copy</button>
+
+      <!-- Present Address -->
+      <div class="edu-header">Present Address</div> <br>
+
+      <label for="CareOf">Care Of</label>
+      <input type="text" id="CareOf" name="CareOf" required value="Father">
+      <button type="button" class="copy-button" onclick="copyText('CareOf')">Copy</button>
+
+      <label for="Vill">Village/ Road/ House/ Flat</label>
+      <input type="text" id="Vill" name="Vill" required value="MASZID PARA">
+      <button type="button" class="copy-button" onclick="copyText('Vill')">Copy</button>
+
+      <label for="District">District</label>
+      <input type="text" id="District" name="District" required value="Panchagarh">
+      <button type="button" class="copy-button" onclick="copyText('District')">Copy</button>
+
+      <label for="Upazila">Upazila/P.S.</label>
+      <input type="text" id="Upazila" name="Upazila" required value="Panchagarh Sadar">
+      <button type="button" class="copy-button" onclick="copyText('Upazila')">Copy</button>
+
+      <label for="postOffice">Post Office</label>
+      <input type="text" id="postOffice" name="postOffice" required value="PANCHAGARH">
+      <button type="button" class="copy-button" onclick="copyText('postOffice')">Copy</button>
+
+      <label for="PostCode">Post Code</label>
+      <input type="text" id="PostCode" name="PostCode" required value="5000">
+      <button type="button" class="copy-button" onclick="copyText('PostCode')">Copy</button>
+    </form>
+  </div>
+
+  <!-- Educational Info -->
+  <div class="edu-container">
+    <div class="edu-header">Educational Info</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Examination</th>
+          <th>Board/University</th>
+          <th>Roll</th>
+          <th>Result</th>
+          <th>Group/Subject</th>
+          <th>Year</th>
+          <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>S.S.C</td>
+          <td>Dinajpur</td>
+          <td>217902</td>
+          <td>GPA 4.72 (Out of 5)</td>
+          <td>Science</td>
+          <td>2016</td>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <td>H.S.C</td>
+          <td>Dinajpur</td>
+          <td>153506</td>
+          <td>GPA 3.67 (Out of 5)</td>
+          <td>Science</td>
+          <td>2018</td>
+          <td>N/A</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+<div class="download-area">
+  <a class="download-btn" href="https://i.postimg.cc/VLktYgL5/Generated-Image-October-06-2025-10-48-PM.png" download="Photo.jpg">
+    📷 Photo
+  </a>
+
+  <a class="download-btn" href="https://i.postimg.cc/50WPGTJ8/Untitled-1.jpg" download="Signature.jpg">
+    ✍️ Signature
+  </a>
+</div>
+
+</body>
+</html>
