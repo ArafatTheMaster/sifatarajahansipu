@@ -86,6 +86,22 @@
       background-color: #64a684;
     }
 
+    .copied-msg {
+      display: none;
+      color: #2f855a;
+      font-size: 13px;
+      margin-left: 5px;
+      font-weight: bold;
+      animation: fadeInOut 2s ease;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
     input[type="submit"] {
       background-color: #4CAF50;
       color: white;
@@ -119,7 +135,6 @@
       background-color: #fafafa;
     }
 
-    /* Download button container */
     .download-area {
       display: flex;
       flex-wrap: wrap;
@@ -149,14 +164,6 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.12);
     }
 
-    .download-icon {
-      width: 18px;
-      height: 18px;
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    /* ---------- Responsive Design ---------- */
     @media (max-width: 768px) {
       body {
         margin: 10px;
@@ -175,11 +182,13 @@
 
       .copy-button {
         width: 100%;
-        margin: 4px 0 10px 0;
+        margin: 4px 0 4px 0;
       }
 
-      form {
-        width: 100%;
+      .copied-msg {
+        display: block;
+        text-align: right;
+        margin-bottom: 10px;
       }
 
       .edu-container, .per-container {
@@ -209,119 +218,120 @@
   </style>
 
   <script>
-    function copyText(inputId) {
-      var inputField = document.getElementById(inputId);
+    function copyText(inputId, btn) {
+      const inputField = document.getElementById(inputId);
       inputField.select();
       navigator.clipboard.writeText(inputField.value)
         .then(() => {
-          alert('Copied: ' + inputField.value);
+          const msg = btn.nextElementSibling;
+          msg.style.display = 'inline';
+          setTimeout(() => {
+            msg.style.display = 'none';
+          }, 2000);
         })
-        .catch(err => {
-          console.error('Unable to copy text', err);
-        });
+        .catch(err => console.error('Copy failed:', err));
     }
   </script>
 </head>
 <body>
 
-  <!-- Personal Info -->
   <div class="per-container">
-    <form action="#" method="post">
+    <form>
       <div class="edu-header">Applicant's Information</div>
 
-      <label for="NameEng">Applicant's Name:</label>
-      <input type="text" id="NameEng" name="NameEng" required value="SIFAT ARA JAHAN">
-      <button type="button" class="copy-button" onclick="copyText('NameEng')">Copy</button>
+      <!-- Personal Info -->
+      <label>Applicant's Name:</label>
+      <input type="text" id="NameEng" value="SIFAT ARA JAHAN">
+      <button type="button" class="copy-button" onclick="copyText('NameEng', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="NameBngla">আবেদনকারীর নাম (বাংলায়):</label>
-      <input type="text" id="NameBngla" name="NameBngla" required value="সিফাত আরা জাহান">
-      <button type="button" class="copy-button" onclick="copyText('NameBngla')">Copy</button>
+      <label>আবেদনকারীর নাম (বাংলায়):</label>
+      <input type="text" id="NameBngla" value="সিফাত আরা জাহান">
+      <button type="button" class="copy-button" onclick="copyText('NameBngla', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="fatherName">Father's Name</label>
-      <input type="text" id="fatherName" name="fatherName" required value="MD. SELIM UDDIN">
-      <button type="button" class="copy-button" onclick="copyText('fatherName')">Copy</button>
+      <label>Father's Name:</label>
+      <input type="text" id="fatherName" value="MD. SELIM UDDIN">
+      <button type="button" class="copy-button" onclick="copyText('fatherName', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="fatherNameB">পিতার নাম (বাংলায়):</label>
-      <input type="text" id="fatherNameB" name="fatherNameB" required value="মোঃ সেলিম উদ্দিন">
-      <button type="button" class="copy-button" onclick="copyText('fatherNameB')">Copy</button>
+      <label>পিতার নাম (বাংলায়):</label>
+      <input type="text" id="fatherNameB" value="মোঃ সেলিম উদ্দিন">
+      <button type="button" class="copy-button" onclick="copyText('fatherNameB', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="motherName">Mother's Name</label>
-      <input type="text" id="motherName" name="motherName" required value="MOST. AMINA BEGUM">
-      <button type="button" class="copy-button" onclick="copyText('motherName')">Copy</button>
+      <label>Mother's Name:</label>
+      <input type="text" id="motherName" value="MOST. AMINA BEGUM">
+      <button type="button" class="copy-button" onclick="copyText('motherName', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="motherNameB">মাতার নাম (বাংলায়):</label>
-      <input type="text" id="motherNameB" name="motherNameB" required value="মোছাঃ আমিনা বেগম">
-      <button type="button" class="copy-button" onclick="copyText('motherNameB')">Copy</button>
+      <label>মাতার নাম (বাংলায়):</label>
+      <input type="text" id="motherNameB" value="মোছাঃ আমিনা বেগম">
+      <button type="button" class="copy-button" onclick="copyText('motherNameB', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="BirthDay">Date of Birth</label>
-      <input type="text" id="BirthDay" name="BirthDay" required value="20-Sep-2000">
-      <button type="button" class="copy-button" onclick="copyText('BirthDay')">Copy</button>
+      <label>Date of Birth:</label>
+      <input type="text" id="BirthDay" value="20-Sep-2000">
+      <button type="button" class="copy-button" onclick="copyText('BirthDay', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="Nationality">Nationality</label>
-      <input type="text" id="Nationality" name="Nationality" required value="Bangladeshi">
-      <button type="button" class="copy-button" onclick="copyText('Nationality')">Copy</button>
+      <label>Nationality:</label>
+      <input type="text" id="Nationality" value="Bangladeshi">
+      <button type="button" class="copy-button" onclick="copyText('Nationality', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="Religion">Religion</label>
-      <input type="text" id="Religion" name="Religion" required value="Islam">
-      <button type="button" class="copy-button" onclick="copyText('Religion')">Copy</button>
+      <label>Religion:</label>
+      <input type="text" id="Religion" value="Islam">
+      <button type="button" class="copy-button" onclick="copyText('Religion', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="Gender">Gender</label>
-      <input type="text" id="Gender" name="Gender" required value="Female">
-      <button type="button" class="copy-button" onclick="copyText('Gender')">Copy</button>
+      <label>Gender:</label>
+      <input type="text" id="Gender" value="Female">
+      <button type="button" class="copy-button" onclick="copyText('Gender', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="NationalID">National ID</label>
-      <input type="text" id="NationalID" name="NationalID" required value="7810738885">
-      <button type="button" class="copy-button" onclick="copyText('NationalID')">Copy</button>
+      <label>National ID:</label>
+      <input type="text" id="NationalID" value="7810738885">
+      <button type="button" class="copy-button" onclick="copyText('NationalID', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="birthReg">Birth Registration</label>
-      <input type="text" id="birthReg" name="birthReg" required value="20007727302002479">
-      <button type="button" class="copy-button" onclick="copyText('birthReg')">Copy</button>
+      <label>Birth Registration:</label>
+      <input type="text" id="birthReg" value="20007727302002479">
+      <button type="button" class="copy-button" onclick="copyText('birthReg', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="PassportID">Passport ID</label>
-      <input type="text" id="PassportID" name="PassportID" required value="N/A">
-      <button type="button" class="copy-button" onclick="copyText('PassportID')">Copy</button>
+      <label>Passport ID:</label>
+      <input type="text" id="PassportID" value="N/A">
+      <button type="button" class="copy-button" onclick="copyText('PassportID', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="maritalStatus">Marital Status</label>
-      <input type="text" id="maritalStatus" name="maritalStatus" required value="Single">
-      <button type="button" class="copy-button" onclick="copyText('maritalStatus')">Copy</button>
+      <label>Marital Status:</label>
+      <input type="text" id="maritalStatus" value="Single">
+      <button type="button" class="copy-button" onclick="copyText('maritalStatus', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="PHNOE">Mobile Number</label>
-      <input type="text" id="PHNOE" name="PHNOE" required value="01701650165">
-      <button type="button" class="copy-button" onclick="copyText('PHNOE')">Copy</button>
+      <label>Mobile Number:</label>
+      <input type="text" id="PHNOE" value="01701650165">
+      <button type="button" class="copy-button" onclick="copyText('PHNOE', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="EmailName">Email</label>
-      <input type="text" id="EmailName" name="EmailName" required value="sifatarajahansipu@gmail.com">
-      <button type="button" class="copy-button" onclick="copyText('EmailName')">Copy</button>
+      <label>Email:</label>
+      <input type="text" id="EmailName" value="sifatarajahansipu@gmail.com">
+      <button type="button" class="copy-button" onclick="copyText('EmailName', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
       <div class="edu-header">Present Address</div>
 
-      <label for="CareOf">Care Of</label>
-      <input type="text" id="CareOf" name="CareOf" required value="Father">
-      <button type="button" class="copy-button" onclick="copyText('CareOf')">Copy</button>
+      <label>Care Of:</label>
+      <input type="text" id="CareOf" value="Father">
+      <button type="button" class="copy-button" onclick="copyText('CareOf', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="Vill">Village/ Road/ House/ Flat</label>
-      <input type="text" id="Vill" name="Vill" required value="MASZID PARA">
-      <button type="button" class="copy-button" onclick="copyText('Vill')">Copy</button>
+      <label>Village/ Road/ House:</label>
+      <input type="text" id="Vill" value="MASZID PARA">
+      <button type="button" class="copy-button" onclick="copyText('Vill', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="District">District</label>
-      <input type="text" id="District" name="District" required value="Panchagarh">
-      <button type="button" class="copy-button" onclick="copyText('District')">Copy</button>
+      <label>District:</label>
+      <input type="text" id="District" value="Panchagarh">
+      <button type="button" class="copy-button" onclick="copyText('District', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="Upazila">Upazila/P.S.</label>
-      <input type="text" id="Upazila" name="Upazila" required value="Panchagarh Sadar">
-      <button type="button" class="copy-button" onclick="copyText('Upazila')">Copy</button>
+      <label>Upazila/P.S.:</label>
+      <input type="text" id="Upazila" value="Panchagarh Sadar">
+      <button type="button" class="copy-button" onclick="copyText('Upazila', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="postOffice">Post Office</label>
-      <input type="text" id="postOffice" name="postOffice" required value="PANCHAGARH">
-      <button type="button" class="copy-button" onclick="copyText('postOffice')">Copy</button>
+      <label>Post Office:</label>
+      <input type="text" id="postOffice" value="PANCHAGARH">
+      <button type="button" class="copy-button" onclick="copyText('postOffice', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
 
-      <label for="PostCode">Post Code</label>
-      <input type="text" id="PostCode" name="PostCode" required value="5000">
-      <button type="button" class="copy-button" onclick="copyText('PostCode')">Copy</button>
+      <label>Post Code:</label>
+      <input type="text" id="PostCode" value="5000">
+      <button type="button" class="copy-button" onclick="copyText('PostCode', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
     </form>
   </div>
 
-  <!-- Educational Info -->
   <div class="edu-container">
     <div class="edu-header">Educational Info</div>
     <table>
@@ -366,4 +376,3 @@
 
 </body>
 </html>
-
