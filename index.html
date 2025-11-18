@@ -1,379 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV Form - Sifat Ara Jahan</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applicant's Information</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 40px;
+}
 
-    form {
-      max-width: 600px;
-      margin: auto;
-    }
+form {
+  max-width: 600px;
+  margin: auto;
+}
 
-    .per-container {
-      max-width: 838px;
-      margin: auto;
-      border: 2px solid #333;
-      padding: 15px;
-      border-radius: 10px;
-      margin-top: 30px;
-      background: #fff;
-    }
+.per-container {
+  max-width: 838px;
+  margin: auto;
+}
 
-    .edu-container {
-      border: 2px solid #333;
-      width: fit-content;
-      padding: 10px 85px;
-      border-radius: 10px;
-      margin: 40px auto;
-      background: #fff;
-    }
+label, input, textarea {
+  display: inline-block;
+  margin-bottom: 10px;
+}
 
-    .edu-header {
-      background-color: #7fc4a0;
-      color: white;
-      font-weight: bold;
-      padding: 8px 15px;
-      font-size: 20px;
-      border-top-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-      margin-top: 20px;
-      margin-bottom: 15px;
-      display: block;
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
+label {
+  width: 35%;
+}
 
-    label, input, textarea {
-      display: inline-block;
-      margin-bottom: 10px;
-    }
+input, textarea {
+  width: 40%;
+  box-sizing: border-box;
+}
 
-    label {
-      width: 35%;
-      font-size: 15px;
-    }
+.copy-button {
+  width: 15%;
+  margin-left: 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
 
-    input, textarea {
-      width: 40%;
-      box-sizing: border-box;
-      padding: 6px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  padding: 5px 0;
+  transition: background-color 0.3s, color 0.3s;
+}
 
-    .copy-button {
-      width: 10%;
-      margin-left: 5px;
-      padding: 6px;
-      box-sizing: border-box;
-      background: #7fc4a0;
-      border: none;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 13px;
-    }
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
 
-    .copy-button:hover {
-      background-color: #64a684;
-    }
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
 
-    .copied-msg {
-      display: none;
-      color: #2f855a;
-      font-size: 13px;
-      margin-left: 5px;
-      font-weight: bold;
-      animation: fadeInOut 2s ease;
-    }
+.per-container {
+  border: 2px solid #333;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 40px auto;
+}
 
-    @keyframes fadeInOut {
-      0% { opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; }
-    }
+.edu-container {
+  border: 2px solid #333;
+  width: fit-content;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 40px auto;
+}
 
-    input[type="submit"] {
-      background-color: #4CAF50;
-      color: white;
-      cursor: pointer;
-      width: 100%;
-    }
+.edu-header {
+  background-color: #7fc4a0;
+  color: white;
+  font-weight: bold;
+  padding: 8px 15px;
+  font-size: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
-    input[type="submit"]:hover {
-      background-color: #45a049;
-    }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+}
 
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 10px;
-    }
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: center;
+}
 
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px 10px;
-      text-align: center;
-      font-size: 14px;
-    }
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
 
-    th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-    }
+tr:nth-child(even) {
+  background-color: #fafafa;
+}
 
-    tr:nth-child(even) {
-      background-color: #fafafa;
-    }
+/* Copyable cell style */
+td.copyable {
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-    .download-area {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      margin: 18px 0;
-    }
+td.copyable:hover {
+  color: #0056a3;
+  background: #eef5ff;
+}
 
-    .download-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      border-radius: 8px;
-      border: 1px solid #2f855a;
-      background: linear-gradient(180deg,#9ee3b9,#7fc4a0);
-      color: #042b18;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
-      transition: transform .08s ease, box-shadow .08s ease;
-    }
+/* Copy notification */
+.copy-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #28a745;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
 
-    .download-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-    }
+.copy-alert.show {
+  opacity: 1;
+}
+</style>
 
-    @media (max-width: 768px) {
-      body {
-        margin: 10px;
+
+<link rel="shortcut icon" type="image/x-icon" href="favicon.png">
+
+  
+
+<script>
+function copyText(inputId) {
+  var inputField = document.getElementById(inputId);
+  inputField.select();
+  navigator.clipboard.writeText(inputField.value)
+  .then(() => {
+    showCopyAlert('Copied: ' + inputField.value);
+  })
+  .catch(err => {
+    console.error('Unable to copy text', err);
+  });
+}
+
+function showCopyAlert(text) {
+  const alertBox = document.getElementById('copyAlert');
+  alertBox.textContent = text;
+  alertBox.classList.add('show');
+  setTimeout(() => alertBox.classList.remove('show'), 1200);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const copyCells = document.querySelectorAll('.copyable');
+  copyCells.forEach(cell => {
+    cell.addEventListener('click', () => {
+      let textToCopy = cell.textContent.trim();
+      if (textToCopy.includes("GPA")) {
+        const match = textToCopy.match(/GPA\s([\d.]+)/);
+        if (match) textToCopy = match[1];
       }
-
-      label {
-        display: block;
-        width: 100%;
-        margin-bottom: 4px;
-      }
-
-      input, textarea {
-        width: 100%;
-        margin-bottom: 8px;
-      }
-
-      .copy-button {
-        width: 100%;
-        margin: 4px 0 4px 0;
-      }
-
-      .copied-msg {
-        display: block;
-        text-align: right;
-        margin-bottom: 10px;
-      }
-
-      .edu-container, .per-container {
-        width: 100%;
-        padding: 10px;
-      }
-
-      table, th, td {
-        font-size: 13px;
-      }
-
-      .edu-header {
-        font-size: 18px;
-        padding: 6px 10px;
-      }
-
-      .download-area {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .download-btn {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  </style>
-
-  <script>
-    function copyText(inputId, btn) {
-      const inputField = document.getElementById(inputId);
-      inputField.select();
-      navigator.clipboard.writeText(inputField.value)
-        .then(() => {
-          const msg = btn.nextElementSibling;
-          msg.style.display = 'inline';
-          setTimeout(() => {
-            msg.style.display = 'none';
-          }, 2000);
-        })
-        .catch(err => console.error('Copy failed:', err));
-    }
-  </script>
+      navigator.clipboard.writeText(textToCopy);
+      showCopyAlert('Copied: ' + textToCopy);
+    });
+  });
+});
+</script>
 </head>
+
 <body>
+<!-- Copy Notification -->
+<div class="copy-alert" id="copyAlert">Copied!</div>
 
-  <div class="per-container">
-    <form>
-      <div class="edu-header">Applicant's Information</div>
+<!-- Personal Info -->
+<div class="per-container">
+<form action="#" method="post">
+<div class="edu-header">Applicant's Information</div>
+<br>
 
-      <!-- Personal Info -->
-      <label>Applicant's Name:</label>
-      <input type="text" id="NameEng" value="SIFAT ARA JAHAN">
-      <button type="button" class="copy-button" onclick="copyText('NameEng', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="NameEng">Applicant's Name:</label>
+<input type="text" id="NameEng" name="NameEng" required value="SIFAT ARA JAHAN">
+<button type="button" class="copy-button" onclick="copyText('NameEng')">Copy</button>
 
-      <label>আবেদনকারীর নাম (বাংলায়):</label>
-      <input type="text" id="NameBngla" value="সিফাত আরা জাহান">
-      <button type="button" class="copy-button" onclick="copyText('NameBngla', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="NameBngla">আবেদনকারীর নাম (বাংলায়):</label>
+<input type="text" id="NameBngla" name="NameBngla" required value="সিফাত আরা জাহান">
+<button type="button" class="copy-button" onclick="copyText('NameBngla')">Copy</button>
 
-      <label>Father's Name:</label>
-      <input type="text" id="fatherName" value="MD. SELIM UDDIN">
-      <button type="button" class="copy-button" onclick="copyText('fatherName', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="fatherName">Father's Name</label>
+<input type="text" id="fatherName" name="fatherName" required value="MD. SELIM UDDIN">
+<button type="button" class="copy-button" onclick="copyText('fatherName')">Copy</button>
 
-      <label>পিতার নাম (বাংলায়):</label>
-      <input type="text" id="fatherNameB" value="মোঃ সেলিম উদ্দীন">
-      <button type="button" class="copy-button" onclick="copyText('fatherNameB', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="fatherNameB">পিতার নাম (বাংলায়):</label>
+<input type="text" id="fatherNameB" name="fatherNameB" required value="মোঃ সেলিম উদ্দীন">
+<button type="button" class="copy-button" onclick="copyText('fatherNameB')">Copy</button>
 
-      <label>Mother's Name:</label>
-      <input type="text" id="motherName" value="MOST. AMINA BEGUM">
-      <button type="button" class="copy-button" onclick="copyText('motherName', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="motherName">Mother's Name</label>
+<input type="text" id="motherName" name="motherName" required value="MOST. AMINA BEGUM">
+<button type="button" class="copy-button" onclick="copyText('motherName')">Copy</button>
 
-      <label>মাতার নাম (বাংলায়):</label>
-      <input type="text" id="motherNameB" value="মোছাঃ আমিনা বেগম">
-      <button type="button" class="copy-button" onclick="copyText('motherNameB', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="motherNameB">মাতার নাম (বাংলায়):</label>
+<input type="text" id="motherNameB" name="motherNameB" required value="মোছাঃ আমিনা বেগম">
+<button type="button" class="copy-button" onclick="copyText('motherNameB')">Copy</button>
 
-      <label>Date of Birth:</label>
-      <input type="text" id="BirthDay" value="20-Sep-2000">
-      <button type="button" class="copy-button" onclick="copyText('BirthDay', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="BirthDay">Date of Birth</label>
+<input type="text" id="BirthDay" name="BirthDay" required value="20 Sep 2000">
+<button type="button" class="copy-button" onclick="copyText('BirthDay')">Copy</button>
 
-      <label>Nationality:</label>
-      <input type="text" id="Nationality" value="Bangladeshi">
-      <button type="button" class="copy-button" onclick="copyText('Nationality', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="Nationality">Nationality</label>
+<input type="text" id="Nationality" name="Nationality" required value="Bangladeshi">
+<button type="button" class="copy-button" onclick="copyText('Nationality')">Copy</button>
 
-      <label>Religion:</label>
-      <input type="text" id="Religion" value="Islam">
-      <button type="button" class="copy-button" onclick="copyText('Religion', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="Religion">Religion</label>
+<input type="text" id="Religion" name="Religion" required value="Islam">
+<button type="button" class="copy-button" onclick="copyText('Religion')">Copy</button>
 
-      <label>Gender:</label>
-      <input type="text" id="Gender" value="Female">
-      <button type="button" class="copy-button" onclick="copyText('Gender', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="Gender">Gender</label>
+<input type="text" id="Gender" name="Gender" required value="Female">
+<button type="button" class="copy-button" onclick="copyText('Gender')">Copy</button>
 
-      <label>National ID:</label>
-      <input type="text" id="NationalID" value="7810738885">
-      <button type="button" class="copy-button" onclick="copyText('NationalID', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="NationalID">National ID</label>
+<input type="text" id="NationalID" name="NationalID" required value="7810738885">
+<button type="button" class="copy-button" onclick="copyText('NationalID')">Copy</button>
 
-      <label>Birth Registration:</label>
-      <input type="text" id="birthReg" value="20007727302002479">
-      <button type="button" class="copy-button" onclick="copyText('birthReg', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="birthReg">Birth Registration</label>
+<input type="text" id="birthReg" name="birthReg" required value="20007727302002479">
+<button type="button" class="copy-button" onclick="copyText('birthReg')">Copy</button>
 
-      <label>Passport ID:</label>
-      <input type="text" id="PassportID" value="N/A">
-      <button type="button" class="copy-button" onclick="copyText('PassportID', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="PassportID">Passport ID</label>
+<input type="text" id="PassportID" name="PassportID" required value="NA">
+<button type="button" class="copy-button" onclick="copyText('PassportID')">Copy</button>
 
-      <label>Marital Status:</label>
-      <input type="text" id="maritalStatus" value="Single">
-      <button type="button" class="copy-button" onclick="copyText('maritalStatus', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="Blood">Blood Group</label>
+<input type="text" id="Blood" name="Blood" required value="B+">
+<button type="button" class="copy-button" onclick="copyText('Blood')">Copy</button>
 
-      <label>Mobile Number:</label>
-      <input type="text" id="PHNOE" value="01701650165">
-      <button type="button" class="copy-button" onclick="copyText('PHNOE', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="maritalStatus">Marital Status</label>
+<input type="text" id="maritalStatus" name="maritalStatus" required value="Single">
+<button type="button" class="copy-button" onclick="copyText('maritalStatus')">Copy</button>
 
-      <label>Email:</label>
-      <input type="text" id="EmailName" value="sifatarajahansipu@gmail.com">
-      <button type="button" class="copy-button" onclick="copyText('EmailName', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="PHNOE">Mobile Number</label>
+<input type="text" id="PHNOE" name="PHNOE" required value="01701650165">
+<button type="button" class="copy-button" onclick="copyText('PHNOE')">Copy</button>
 
-      <div class="edu-header">Present Address</div>
+<label for="EmailName">Email</label>
+<input type="text" id="EmailName" name="EmailName" required value="sifatarajahansipu@gmail.com">
+<button type="button" class="copy-button" onclick="copyText('EmailName')">Copy</button>
 
-      <label>Care Of:</label>
-      <input type="text" id="CareOf" value="Father">
-      <button type="button" class="copy-button" onclick="copyText('CareOf', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<!-- Present Address -->
+<div class="edu-header">Present Address</div>
+<br>
 
-      <label>Village/ Road/ House:</label>
-      <input type="text" id="Vill" value="MASZID PARA">
-      <button type="button" class="copy-button" onclick="copyText('Vill', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="CareOf">Care Of</label>
+<input type="text" id="CareOf" name="CareOf" required value="MD. SELIM UDDIN">
+<button type="button" class="copy-button" onclick="copyText('CareOf')">Copy</button>
 
-      <label>District:</label>
-      <input type="text" id="District" value="Panchagarh">
-      <button type="button" class="copy-button" onclick="copyText('District', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="Vill">Village/ Road/ House/ Flat</label>
+<input type="text" id="Vill" name="Vill" required value="MASZID PARA">
+<button type="button" class="copy-button" onclick="copyText('Vill')">Copy</button>
 
-      <label>Upazila/P.S.:</label>
-      <input type="text" id="Upazila" value="Panchagarh Sadar">
-      <button type="button" class="copy-button" onclick="copyText('Upazila', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="District">District</label>
+<input type="text" id="District" name="District" required value="Panchagarh">
+<button type="button" class="copy-button" onclick="copyText('District')">Copy</button>
 
-      <label>Post Office:</label>
-      <input type="text" id="postOffice" value="PANCHAGARH">
-      <button type="button" class="copy-button" onclick="copyText('postOffice', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
+<label for="Upazila">Upazila/P.S.</label>
+<input type="text" id="Upazila" name="Upazila" required value="Panchagarh Sadar">
+<button type="button" class="copy-button" onclick="copyText('Upazila')">Copy</button>
 
-      <label>Post Code:</label>
-      <input type="text" id="PostCode" value="5000">
-      <button type="button" class="copy-button" onclick="copyText('PostCode', this)">Copy</button><span class="copied-msg">✅ Copied!</span><br>
-    </form>
-  </div>
+<label for="postOffice">Post Office</label>
+<input type="text" id="postOffice" name="postOffice" required value="Panchagarh">
+<button type="button" class="copy-button" onclick="copyText('postOffice')">Copy</button>
 
-  <div class="edu-container">
-    <div class="edu-header">Educational Info</div>
-    <table>
-      <thead>
-        <tr>
-          <th>Examination</th>
-          <th>Board/University</th>
-          <th>Roll</th>
-          <th>Result</th>
-          <th>Group/Subject</th>
-          <th>Year</th>
-          <th>Duration</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>S.S.C</td>
-          <td>Dinajpur</td>
-          <td>217902</td>
-          <td>GPA 4.72 (Out of 5)</td>
-          <td>Science</td>
-          <td>2016</td>
-          <td>N/A</td>
-        </tr>
-        <tr>
-          <td>H.S.C</td>
-          <td>Dinajpur</td>
-          <td>153506</td>
-          <td>GPA 3.67 (Out of 5)</td>
-          <td>Science</td>
-          <td>2018</td>
-          <td>N/A</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<label for="PostCode">Post Code</label>
+<input type="text" id="PostCode" name="PostCode" required value="5000">
+<button type="button" class="copy-button" onclick="copyText('PostCode')">Copy</button>
 
-  <div class="download-area">
-    <a class="download-btn" href="https://i.postimg.cc/VLktYgL5/Generated-Image-October-06-2025-10-48-PM.png" download="Photo.jpg">📷 Photo</a>
-    <a class="download-btn" href="https://i.postimg.cc/50WPGTJ8/Untitled-1.jpg" download="Signature.jpg">✍️ Signature</a>
-  </div>
+
+</form>
+</div>
+
+<!-- School Educational Info -->
+<div class="edu-container">
+<div class="edu-header">School Educational Info</div>
+<table>
+  <thead>
+    <tr>
+      <th>Examination</th>
+      <th>Board</th>
+      <th>Roll</th>
+      <th>Reg.</th>
+      <th>Result</th>
+      <th>Group</th>
+      <th>Passing Year</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>S.S.C</td>
+      <td>Dinajpur</td>
+      <td class="copyable">217902</td>
+      <td class="copyable">1317764125</td>
+      <td class="copyable">GPA <span style="color:RED;font-weight:bold">4.72</span> (Out of 5)</td>
+      <td>Science</td>
+      <td>2016</td>
+      <td>2 Years</td>
+    </tr>
+    <tr>
+      <td>H.S.C</td>
+      <td>Dinajpur</td>
+      <td class="copyable">153506</td>
+      <td class="copyable">1317764125</td>
+      <td class="copyable">GPA <span style="color:RED;font-weight:bold">3.67</span> (Out of 5)</td>
+      <td>Science</td>
+      <td>2018</td>
+      <td>2 Years</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- University Educational Info -->
+<div class="edu-container">
+<div class="edu-header">University Educational Info</div>
+<table>
+  <thead>
+    <tr>
+      <th>Examination</th>
+      <th>University</th>
+      <th>Roll</th>
+      <th>Reg.</th>
+      <th>Result</th>
+      <th>Subject</th>
+      <th>Year</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>B.A (Honour's)</td>
+      <td>National University</td>
+      <td class="copyable">3135213</td>
+      <td class="copyable">18211190158</td>
+      <td class="copyable">CGPA <span style="color:RED;font-weight:bold">4.00</span> (Out of 4)</td>
+      <td>English</td>
+      <td class="copyable">2023</td>
+      <td>4 Years</td>
+    </tr>
+    <tr>
+      <td>M.S.S (Master's)</td>
+      <td>National University</td>
+      <td class="copyable">-</td>
+      <td class="copyable">-</td>
+      <td class="copyable">CGPA <span style="color:RED;font-weight:bold">4.00</span> (Out of 4)</td>
+      <td>English</td>
+      <td class="copyable">-</td>
+      <td>1 Years</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+</div>
+
+
+
+
+<!-- Download Buttons Section -->
+<div style="text-align:center; margin-top:40px;">
+
+  <!-- 300x300 Download Button -->
+  <a href="https://i.postimg.cc/VLktYgL5/Generated-Image-October-06-2025-10-48-PM.png" download>
+    <img src="arafat_upload (300X300) 2.jpg" alt="Download 300x300" width="300" height="300"
+         style="border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.3); cursor:pointer;">
+  </a>
+
+  <br><br>
+
+  <!-- 300x80 Download Button -->
+  <a href="300x80.jpg" download>
+    <img src="300x80.jpg" alt="https://i.postimg.cc/50WPGTJ8/Untitled-1.jpg" width="300" height="80"
+         style="border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.25); cursor:pointer;">
+  </a>
+
+</div> 
+
 
 </body>
 </html>
+
+
+
+
 
