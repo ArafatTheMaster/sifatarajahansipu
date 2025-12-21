@@ -2,375 +2,325 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Dashboard</title>
+<title>Reading & Newspaper Analysis</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
-/* ================= BASE ================= */
-*{box-sizing:border-box}
+/* ================= RESET ================= */
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-  margin:0;
   font-family:Poppins,sans-serif;
-  background:linear-gradient(135deg,#020617,#020617);
+  background:linear-gradient(180deg,#020617,#020617);
   color:#fff;
 }
 
 /* ================= LOGIN ================= */
-#backgroundSection{
+#loginSection{
   min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:20px;
 }
-
-.login-card{
-  width:100%;
-  max-width:420px;
+.login-box{
   background:#1e293b;
-  padding:40px 30px;
-  border-radius:18px;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
-}
-
-.login-card h2{
-  text-align:center;
-  margin-bottom:25px;
-}
-
-.login-card input{
+  padding:30px;
+  border-radius:16px;
   width:100%;
-  padding:14px;
+  max-width:360px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+.login-box h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+.login-box input{
+  width:100%;
+  padding:12px;
   margin-bottom:15px;
   border:none;
-  border-radius:10px;
-  font-size:14px;
+  border-radius:8px;
 }
-
-.login-card button{
+.login-box button{
   width:100%;
-  padding:14px;
+  padding:12px;
   border:none;
   border-radius:30px;
   background:#22c55e;
-  color:#052e16;
   font-weight:600;
-  font-size:15px;
   cursor:pointer;
 }
 
 /* ================= DASHBOARD ================= */
-#loggedInSection{display:none;min-height:100vh}
+#dashboard{
+  display:none;
+  min-height:100vh;
+}
 
+/* ================= TOPBAR ================= */
 .topbar{
-  background:#020617;
-  padding:14px 18px;
+  background:#e11d48;
+  padding:12px 18px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  flex-wrap:wrap;
 }
-
 .user-info{
-  display:flex;
-  align-items:center;
-  gap:6px;
   font-size:14px;
 }
-
-.online-dot{
-  width:8px;
-  height:8px;
-  background:#22c55e;
-  border-radius:50%;
-}
-
-.admin-badge{
-  background:#facc15;
-  color:#000;
-  padding:2px 6px;
-  border-radius:6px;
-  font-size:11px;
-  font-weight:600;
-}
-
-.user-badge{
-  background:#22c55e;
-  color:#052e16;
-  padding:2px 6px;
-  border-radius:6px;
-  font-size:11px;
-  font-weight:600;
-}
-
-.logout-btn{
-  background:#dc2626;
-  color:#fff;
+.logout{
+  background:#7c3aed;
   border:none;
-  padding:6px 12px;
+  color:#fff;
+  padding:6px 14px;
   border-radius:6px;
   cursor:pointer;
 }
 
-#dashboardContent{padding:16px}
-
-/* ================= RNA ================= */
-.rna-scope{
-  background:linear-gradient(180deg,#071020,#071827);
-  color:#e6eef8;
-  min-height:100vh;
-  padding-bottom:40px;
+/* ================= CONTENT ================= */
+.container{
+  max-width:1100px;
+  margin:30px auto;
+  padding:0 16px;
 }
-.rna-container{max-width:1000px;margin:auto}
-.rna-title{text-align:center;margin-bottom:20px}
+.title{
+  text-align:center;
+  margin-bottom:20px;
+}
 
-.rna-phase{
+/* ================= ACCORDION ================= */
+.phase{
   background:rgba(255,255,255,.05);
   border-radius:14px;
-  margin-bottom:14px;
+  margin-bottom:16px;
   overflow:hidden;
 }
-
-.rna-accordion-header{
-  all:unset;
+.phase-header{
   display:flex;
   justify-content:space-between;
-  width:100%;
+  align-items:center;
   padding:16px;
   cursor:pointer;
-  font-weight:600;
 }
-
-.rna-accordion-icon{
+.phase-header .icon{
+  font-size:20px;
   transition:.4s;
 }
-
-.rna-phase.open .rna-accordion-icon{
-  transform:rotate(180deg);
+.phase.open .icon{
+  transform:rotate(45deg);
 }
-
-.rna-accordion-body{
-  max-height:0;
+.phase-body{
+  height:0;
   overflow:hidden;
-  transition:max-height .4s ease;
+  transition:height .4s ease;
 }
 
-.rna-phase.open .rna-accordion-body{
-  max-height:600px;
-}
-
-.rna-lessons{
+/* ================= LESSON GRID ================= */
+.lessons{
+  padding:16px;
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:10px;
-  padding:16px;
 }
-
-.rna-lesson-btn{
-  background:#072036;
-  color:#fff;
+.lesson-btn{
+  background:#0f172a;
   border:none;
-  padding:10px;
-  border-radius:8px;
+  color:#fff;
+  padding:12px;
+  border-radius:10px;
   cursor:pointer;
 }
+@media(max-width:768px){
+  .lessons{grid-template-columns:repeat(2,1fr);}
+}
 
-/* ================= MODAL ================= */
-.rna-modal{
+/* ================= CINEMATIC POPUP ================= */
+.modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.7);
-  display:none;
+  background:rgba(0,0,0,.85);
+  display:flex;
   justify-content:center;
   align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
   z-index:9999;
 }
-
-.rna-modal.show{display:flex}
-
-.rna-video-wrap{
-  width:90%;
-  max-width:900px;
-  aspect-ratio:16/9;
-  background:#000;
-  position:relative;
-  border-radius:12px;
-  overflow:hidden;
+.modal.show{
+  opacity:1;
+  pointer-events:auto;
 }
 
-.rna-video-wrap iframe{
+.video-card{
+  width:92%;
+  max-width:1200px;
+  background:#000;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 30px 90px rgba(0,0,0,.8);
+}
+
+.video-frame{
+  position:relative;
+  padding-top:56.25%;
+}
+.video-frame iframe{
+  position:absolute;
+  inset:0;
   width:100%;
   height:100%;
+  border:0;
 }
 
-.rna-close-btn{
+.close-btn{
   position:absolute;
-  top:10px;
-  right:10px;
-  background:#ef4444;
-  color:#fff;
-  border:none;
-  width:36px;
-  height:36px;
+  top:14px;
+  right:14px;
+  width:44px;
+  height:44px;
   border-radius:50%;
+  background:#ef4444;
+  border:none;
+  color:#fff;
+  font-size:20px;
   cursor:pointer;
-}
-
-/* ================= MOBILE ================= */
-@media(max-width:640px){
-  .rna-lessons{grid-template-columns:repeat(2,1fr)}
+  z-index:20;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<section id="backgroundSection">
-  <div class="login-card">
-    <form onsubmit="login(event)">
-      <h2>Login</h2>
-      <input id="username" placeholder="Username" required>
-      <input id="password" type="password" placeholder="Password" required>
-      <button>LOGIN</button>
-    </form>
+<!-- ================= LOGIN ================= -->
+<section id="loginSection">
+  <div class="login-box">
+    <h2>Login</h2>
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="login()">LOGIN</button>
   </div>
 </section>
 
-<!-- DASHBOARD -->
-<div id="loggedInSection">
+<!-- ================= DASHBOARD ================= -->
+<div id="dashboard">
   <div class="topbar">
-    <div class="user-info">
-      <span>👤 Welcome,</span>
-      <span class="online-dot"></span>
-      <span id="topUserName"></span>
-      <span id="roleBadge"></span>
-    </div>
-    <button class="logout-btn" onclick="logout()">Logout</button>
+    <div class="user-info" id="userInfo"></div>
+    <button class="logout" onclick="logout()">Logout</button>
   </div>
 
-  <div id="dashboardContent"></div>
+  <div class="container">
+    <h2 class="title">Reading & Newspaper Analysis</h2>
+
+    <div class="phase open">
+      <div class="phase-header">
+        <span>Phase 1</span>
+        <span class="icon">+</span>
+      </div>
+      <div class="phase-body">
+        <div class="lessons">
+          <button class="lesson-btn" data-v="l2vB4qovRoE">Lesson 01</button>
+          <button class="lesson-btn" data-v="zAs2Uq5pYvg">Lesson 02</button>
+          <button class="lesson-btn" data-v="mKnFLXJwmu4">Lesson 03</button>
+          <button class="lesson-btn" data-v="vVD9Owj31sU">Lesson 04</button>
+          <button class="lesson-btn" data-v="Dofx24iTXiw">Lesson 05</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= POPUP ================= -->
+<div class="modal" id="modal">
+  <div class="video-card">
+    <button class="close-btn" onclick="closeModal()">✕</button>
+    <div class="video-frame" id="videoFrame"></div>
+  </div>
 </div>
 
 <script>
 /* ================= USERS ================= */
 const USERS=[
- {u:"admin",p:"1234",role:"admin",name:"ARAFAT AHMED"},
+ {u:"admin",p:"1234",role:"admin",name:"Arafat Ahmed"},
  {u:"user1",p:"111",role:"user",name:"Tithi"},
  {u:"user2",p:"222",role:"user",name:"Bethi"},
  {u:"user3",p:"333",role:"user",name:"Sakib"}
 ];
-
 const LIMIT=12*60*60*1000;
 
-/* ================= SESSION ================= */
-document.addEventListener("DOMContentLoaded",()=>{
- const auth=JSON.parse(localStorage.getItem("auth"));
- if(!auth) return;
-
- if(auth.role!=="admin" && Date.now()-auth.t>LIMIT){
-   localStorage.clear();
-   return;
- }
- showDashboard();
-});
+/* ================= AUTO LOGIN ================= */
+const session=JSON.parse(localStorage.getItem("session"));
+if(session){
+  if(session.role==="admin" || Date.now()-session.time<LIMIT){
+    showDashboard(session);
+  }else{
+    localStorage.clear();
+  }
+}
 
 /* ================= LOGIN ================= */
-function login(e){
- e.preventDefault();
- const u=username.value.trim();
- const p=password.value.trim();
- const user=USERS.find(x=>x.u===u && x.p===p);
- if(!user) return Swal.fire("Error","Invalid login","error");
-
- localStorage.setItem("auth",JSON.stringify({
-   u:user.u,
-   name:user.name,
-   role:user.role,
-   t:Date.now()
- }));
-
- Swal.fire("Success","Login successful","success").then(showDashboard);
+function login(){
+  const u=username.value.trim();
+  const p=password.value.trim();
+  const user=USERS.find(x=>x.u===u && x.p===p);
+  if(!user){alert("Invalid login");return;}
+  const data={...user,time:Date.now()};
+  localStorage.setItem("session",JSON.stringify(data));
+  showDashboard(data);
 }
 
+function showDashboard(user){
+  loginSection.style.display="none";
+  dashboard.style.display="block";
+  userInfo.innerHTML=`👤 Welcome, 🟢 ${user.name} ${user.role==="admin" ? "👑 Admin" : "⭐ Active"}`;
+}
+
+/* ================= LOGOUT ================= */
 function logout(){
- localStorage.clear();
- location.reload();
+  localStorage.clear();
+  location.reload();
 }
 
-/* ================= DASHBOARD ================= */
-function showDashboard(){
- backgroundSection.style.display="none";
- loggedInSection.style.display="block";
-
- const auth=JSON.parse(localStorage.getItem("auth"));
- topUserName.textContent=auth.name;
-
- if(auth.role==="admin"){
-   roleBadge.textContent="👑 Admin";
-   roleBadge.className="admin-badge";
- }else{
-   roleBadge.textContent="🔰 Active";
-   roleBadge.className="user-badge";
- }
-
- dashboardContent.innerHTML=`
- <div class="rna-scope">
-  <div class="rna-container">
-   <h2 class="rna-title">Reading & Newspaper Analysis</h2>
-
-   <div class="rna-phase">
-    <button class="rna-accordion-header">
-     Phase 1 <span class="rna-accordion-icon">+</span>
-    </button>
-    <div class="rna-accordion-body">
-     <div class="rna-lessons">
-      <button class="rna-lesson-btn" data-video="dTu5dTEzVM4">Lesson 01</button>
-      <button class="rna-lesson-btn" data-video="2AO2Utn2eoU">Lesson 02</button>
-      <button class="rna-lesson-btn" data-video="Rlz7oGuwVnc">Lesson 03</button>
-      <button class="rna-lesson-btn" data-video="kw4tT7SCmaY">Lesson 04</button>
-      <button class="rna-lesson-btn" data-video="l2vB4qovRoE">Lesson 05</button>
-     </div>
-    </div>
-   </div>
-  </div>
-
-  <div class="rna-modal" id="rnaModal">
-   <div class="rna-video-wrap">
-    <button class="rna-close-btn" onclick="closeVideo()">✕</button>
-    <div id="videoBox"></div>
-   </div>
-  </div>
- </div>`;
- initRNA();
-}
-
-/* ================= RNA ================= */
-function initRNA(){
- document.querySelectorAll(".rna-accordion-header").forEach(h=>{
+/* ================= ACCORDION ================= */
+document.querySelectorAll(".phase-header").forEach(h=>{
   h.onclick=()=>{
-   document.querySelectorAll(".rna-phase").forEach(p=>{
-    if(p!==h.parentElement) p.classList.remove("open");
-   });
-   h.parentElement.classList.toggle("open");
-  }
- });
+    document.querySelectorAll(".phase").forEach(p=>{
+      if(p!==h.parentElement){
+        p.classList.remove("open");
+        p.querySelector(".phase-body").style.height="0px";
+      }
+    });
+    const p=h.parentElement;
+    const body=p.querySelector(".phase-body");
+    if(p.classList.contains("open")){
+      body.style.height="0px";
+      p.classList.remove("open");
+    }else{
+      p.classList.add("open");
+      body.style.height=body.scrollHeight+"px";
+      body.ontransitionend=()=>body.style.height="auto";
+    }
+  };
+});
 
- document.querySelectorAll(".rna-lesson-btn").forEach(b=>{
-  b.onclick=()=>{
-   rnaModal.classList.add("show");
-   videoBox.innerHTML=
-    `<iframe src="https://www.youtube.com/embed/${b.dataset.video}?autoplay=1" allowfullscreen></iframe>`;
-  }
- });
-}
+/* ================= POPUP ================= */
+document.querySelectorAll(".lesson-btn").forEach(btn=>{
+  btn.onclick=()=>{
+    videoFrame.innerHTML=
+      `<iframe src="https://www.youtube.com/embed/${btn.dataset.v}?autoplay=1&rel=0"
+       allowfullscreen></iframe>`;
+    modal.classList.add("show");
+    document.body.style.overflow="hidden";
+  };
+});
 
-function closeVideo(){
- rnaModal.classList.remove("show");
- videoBox.innerHTML="";
+function closeModal(){
+  modal.classList.remove("show");
+  videoFrame.innerHTML="";
+  document.body.style.overflow="";
 }
 </script>
 
