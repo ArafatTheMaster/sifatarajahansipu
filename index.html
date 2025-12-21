@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Multi Login Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+/* ================= BASE ================= */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:linear-gradient(135deg,#020617,#020617);
+  color:#fff;
+}
+
+/* ================= LOGIN ================= */
+#backgroundSection{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.login-card{
+  width:100%;
+  max-width:420px;
+  background:#1e293b;
+  padding:40px 30px;
+  border-radius:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+.login-card h2{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.login-card input{
+  width:100%;
+  padding:14px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:10px;
+  font-size:14px;
+}
+
+.login-card button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:#22c55e;
+  color:#052e16;
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer;
+}
+
+/* ================= DASHBOARD ================= */
+#loggedInSection{display:none;min-height:100vh}
+
+.topbar{
+  background:#020617;
+  padding:14px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.user-info{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:14px;
+}
+
+.online-dot{
+  width:8px;
+  height:8px;
+  background:#22c55e;
+  border-radius:50%;
+}
+
+.admin-badge{
+  background:#facc15;
+  color:#000;
+  padding:2px 6px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:600;
+}
+
+.user-badge{
+  background:#22c55e;
+  color:#052e16;
+  padding:2px 6px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:600;
+}
+
+.logout-btn{
+  background:#dc2626;
+  color:#fff;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+#dashboardContent{padding:16px}
+
+/* ================= RNA ================= */
+.rna-scope{
+  background:linear-gradient(180deg,#071020,#071827);
+  color:#e6eef8;
+  min-height:100vh;
+  padding-bottom:40px;
+}
+.rna-container{max-width:1000px;margin:auto}
+.rna-title{text-align:center;margin-bottom:20px}
+
+.rna-phase{
+  background:rgba(255,255,255,.05);
+  border-radius:14px;
+  margin-bottom:14px;
+  overflow:hidden;
+}
+
+.rna-accordion-header{
+  all:unset;
+  display:flex;
+  justify-content:space-between;
+  width:100%;
+  padding:16px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.rna-accordion-icon{
+  transition:.4s;
+}
+
+.rna-phase.open .rna-accordion-icon{
+  transform:rotate(180deg);
+}
+
+.rna-accordion-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+}
+
+.rna-phase.open .rna-accordion-body{
+  max-height:600px;
+}
+
+.rna-lessons{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  padding:16px;
+}
+
+.rna-lesson-btn{
+  background:#072036;
+  color:#fff;
+  border:none;
+  padding:10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* ================= MODAL ================= */
+.rna-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.rna-modal.show{display:flex}
+
+.rna-video-wrap{
+  width:90%;
+  max-width:900px;
+  aspect-ratio:16/9;
+  background:#000;
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.rna-video-wrap iframe{
+  width:100%;
+  height:100%;
+}
+
+.rna-close-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:#ef4444;
+  color:#fff;
+  border:none;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:640px){
+  .rna-lessons{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<section id="backgroundSection">
+  <div class="login-card">
+    <form onsubmit="login(event)">
+      <h2>Login</h2>
+      <input id="username" placeholder="Username" required>
+      <input id="password" type="password" placeholder="Password" required>
+      <button>LOGIN</button>
+    </form>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<div id="loggedInSection">
+  <div class="topbar">
+    <div class="user-info">
+      <span>👤 Welcome,</span>
+      <span class="online-dot"></span>
+      <span id="topUserName"></span>
+      <span id="roleBadge"></span>
+    </div>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <div id="dashboardContent"></div>
+</div>
+
+<script>
+/* ================= USERS ================= */
+const USERS=[
+ {u:"admin",p:"1234",role:"admin",name:"ARAFAT AHMED"},
+ {u:"user1",p:"111",role:"user",name:"Tithi"},
+ {u:"user2",p:"222",role:"user",name:"Bethi"}
+ {u:"user3",p:"333",role:"user",name:"Sakib"}
+];
+
+const LIMIT=12*60*60*1000;
+
+/* ================= SESSION ================= */
+document.addEventListener("DOMContentLoaded",()=>{
+ const auth=JSON.parse(localStorage.getItem("auth"));
+ if(!auth) return;
+
+ if(auth.role!=="admin" && Date.now()-auth.t>LIMIT){
+   localStorage.clear();
+   return;
+ }
+ showDashboard();
+});
+
+/* ================= LOGIN ================= */
+function login(e){
+ e.preventDefault();
+ const u=username.value.trim();
+ const p=password.value.trim();
+ const user=USERS.find(x=>x.u===u && x.p===p);
+ if(!user) return Swal.fire("Error","Invalid login","error");
+
+ localStorage.setItem("auth",JSON.stringify({
+   u:user.u,
+   name:user.name,
+   role:user.role,
+   t:Date.now()
+ }));
+
+ Swal.fire("Success","Login successful","success").then(showDashboard);
+}
+
+function logout(){
+ localStorage.clear();
+ location.reload();
+}
+
+/* ================= DASHBOARD ================= */
+function showDashboard(){
+ backgroundSection.style.display="none";
+ loggedInSection.style.display="block";
+
+ const auth=JSON.parse(localStorage.getItem("auth"));
+ topUserName.textContent=auth.name;
+
+ if(auth.role==="admin"){
+   roleBadge.textContent="👑 Admin";
+   roleBadge.className="admin-badge";
+ }else{
+   roleBadge.textContent="🔰 Active";
+   roleBadge.className="user-badge";
+ }
+
+ dashboardContent.innerHTML=`
+ <div class="rna-scope">
+  <div class="rna-container">
+   <h2 class="rna-title">Reading & Newspaper Analysis</h2>
+
+   <div class="rna-phase">
+    <button class="rna-accordion-header">
+     Phase 1 <span class="rna-accordion-icon">+</span>
+    </button>
+    <div class="rna-accordion-body">
+     <div class="rna-lessons">
+      <button class="rna-lesson-btn" data-video="iotb892fI_E">Lesson 01</button>
+      <button class="rna-lesson-btn" data-video="fbuuojGuSC8">Lesson 02</button>
+      <button class="rna-lesson-btn" data-video="2d3hVo8ptOg">Lesson 03</button>
+      <button class="rna-lesson-btn" data-video="iotb892fI_E">Lesson 04</button>
+      <button class="rna-lesson-btn" data-video="fbuuojGuSC8">Lesson 05</button>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="rna-modal" id="rnaModal">
+   <div class="rna-video-wrap">
+    <button class="rna-close-btn" onclick="closeVideo()">✕</button>
+    <div id="videoBox"></div>
+   </div>
+  </div>
+ </div>`;
+ initRNA();
+}
+
+/* ================= RNA ================= */
+function initRNA(){
+ document.querySelectorAll(".rna-accordion-header").forEach(h=>{
+  h.onclick=()=>{
+   document.querySelectorAll(".rna-phase").forEach(p=>{
+    if(p!==h.parentElement) p.classList.remove("open");
+   });
+   h.parentElement.classList.toggle("open");
+  }
+ });
+
+ document.querySelectorAll(".rna-lesson-btn").forEach(b=>{
+  b.onclick=()=>{
+   rnaModal.classList.add("show");
+   videoBox.innerHTML=
+    `<iframe src="https://www.youtube.com/embed/${b.dataset.video}?autoplay=1" allowfullscreen></iframe>`;
+  }
+ });
+}
+
+function closeVideo(){
+ rnaModal.classList.remove("show");
+ videoBox.innerHTML="";
+}
+</script>
+
+</body>
+</html>
