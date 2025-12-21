@@ -58,6 +58,17 @@ body{
   min-height:100vh;
 }
 
+.admin-badge{
+  background:#facc15;
+  color:#111;
+  font-size:12px;
+  padding:3px 8px;
+  border-radius:6px;
+  font-weight:600;
+  margin-left:6px;
+}
+    
+    
 /* ================= TOPBAR ================= */
 .topbar{
   background:#e11d48;
@@ -160,7 +171,7 @@ body{
   border-radius:18px;
   overflow:hidden;
   position:relative;
-  box-shadow:0 30px 90px rgba(0,0,0,.8);
+  border:2px solid rgba(255,255,255,0.85);
 }
 
 .video-frame{
@@ -244,7 +255,7 @@ body{
 <script>
 /* ================= USERS ================= */
 const USERS=[
- {u:"admin",p:"1234",role:"admin",name:"Arafat Ahmed"},
+ {u:"admin",p:"1234",role:"admin",name:"Arafat"},
  {u:"user1",p:"111",role:"user",name:"Tithi"},
  {u:"user2",p:"222",role:"user",name:"Bethi"},
  {u:"user3",p:"333",role:"user",name:"Sakib"}
@@ -275,7 +286,14 @@ function login(){
 function showDashboard(user){
   loginSection.style.display="none";
   dashboard.style.display="block";
-  userInfo.innerHTML=`👤 Welcome, 🟢 ${user.name} ${user.role==="admin" ? "👑 Admin" : "⭐ Active"}`;
+  userInfo.innerHTML = `
+  👤 Welcome, 🟢 ${user.name}
+  ${user.role==="admin"
+    ? `<span class="admin-badge">👑 Admin</span>`
+    : `<span class="admin-badge" style="background:#22c55e">⭐ Active</span>`
+  }
+`;
+
 }
 
 /* ================= LOGOUT ================= */
